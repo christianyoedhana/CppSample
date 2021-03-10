@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Monitor", "..\CppPractice\M
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SutterMonitorSampleUses", "SutterMonitorSampleUses\SutterMonitorSampleUses.vcxproj", "{0E12E46E-03A4-4018-9DBA-888D948F948D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuickSort", "QuickSort\QuickSort.vcxproj", "{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{0E12E46E-03A4-4018-9DBA-888D948F948D}.Release|x64.Build.0 = Release|x64
 		{0E12E46E-03A4-4018-9DBA-888D948F948D}.Release|x86.ActiveCfg = Release|Win32
 		{0E12E46E-03A4-4018-9DBA-888D948F948D}.Release|x86.Build.0 = Release|Win32
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Debug|x64.ActiveCfg = Debug|x64
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Debug|x64.Build.0 = Debug|x64
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Debug|x86.ActiveCfg = Debug|Win32
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Debug|x86.Build.0 = Debug|Win32
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Release|x64.ActiveCfg = Release|x64
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Release|x64.Build.0 = Release|x64
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Release|x86.ActiveCfg = Release|Win32
+		{1E4BCFB3-D0F5-4B0B-871B-759C8CD6E8BB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

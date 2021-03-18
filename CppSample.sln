@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fibonacci", "Fibonacci\Fibo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatrixChainMultiplication", "MatrixChainMultiplication\MatrixChainMultiplication.vcxproj", "{5652B63A-53D0-4C03-B1E4-C47211064A99}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tuple_QRef", "Tuple_QRef\Tuple_QRef.vcxproj", "{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{5652B63A-53D0-4C03-B1E4-C47211064A99}.Release|x64.Build.0 = Release|x64
 		{5652B63A-53D0-4C03-B1E4-C47211064A99}.Release|x86.ActiveCfg = Release|Win32
 		{5652B63A-53D0-4C03-B1E4-C47211064A99}.Release|x86.Build.0 = Release|Win32
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Debug|x64.ActiveCfg = Debug|x64
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Debug|x64.Build.0 = Debug|x64
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Debug|x86.ActiveCfg = Debug|Win32
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Debug|x86.Build.0 = Debug|Win32
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Release|x64.ActiveCfg = Release|x64
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Release|x64.Build.0 = Release|x64
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Release|x86.ActiveCfg = Release|Win32
+		{7C66C38A-C069-4724-AFA1-F0FA055E8DCE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

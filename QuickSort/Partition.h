@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <random>
 
+namespace CppSample{
 //Take pivot value from the end of the list
 //front will move forward while the value is less than pivot
 //back move backward while the value is greater or equal to pivot.
@@ -59,7 +60,4 @@ auto partitionArbitrary(T& list, typename T::size_type front, typename T::size_t
 	std::swap(list.at(gen(engine)), list.at(back));
 	return partition(list, front, back, compare);
 }
-
-void partitionTest();
-void arbitraryPartitionTest();
-void quicksortTest();
+}

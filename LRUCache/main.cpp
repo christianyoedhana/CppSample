@@ -1,3 +1,4 @@
+//I suspect this solution almost work. But unnecessarily complex with the pre-allocation of an "empty" linked list
 #include <iostream>
 #include <vector>
 #include <map>
@@ -27,92 +28,136 @@ protected:
     virtual int get(int) = 0; //get function
 
 };
-//Implement this as a fixed-size circular linked list
+
+//Implement this as a fixed-size doubly linked list. Maybe STL can help,
 class LRUCache : public virtual Cache {
 private:
+    vector<Node*> cacheStorage;
+    size_t nextEmpty = 0;
+    //eventually this is mostly true
     bool cacheFull() {
         return mp.size() == cp;
     }
 
-    void removeLRU() {
+    void removeLRU(int key, int val) {
         //throw away LRU.
         //which one is LRU? Tail.
         Node* lru = tail;
         mp.erase(lru->key);
-        Node* prev = lru->prev;
-        tail = prev;
-        if (prev) {
-            prev->next = nullptr;
-        }
-        //only node because cache size = 1
-        if (head == lru) {
-            head = nullptr;
-        }
-        delete lru;
-    }
-
-    void insertFront(Node* newHead) {
-        Node* curHead = head;
-        if (curHead) {
-            newHead->next = curHead;
-            curHead->prev = newHead;
-        }
-        head = newHead;
-        if (!tail) {
-            tail = head;
-        }
+        lru->key = key;
+        lru->value = val;
+        mp[key] = lru;
+        moveToFront(lru);
     }
 
     //Promote a node to front on cache hit
-    void promoteNode(Node* newHead) {
+    void moveToFront(Node* newHead) {
+        //implies tail does not move
         if (head == newHead) return;
         Node* prev = newHead->prev;
         if (prev) {
+            if (tail == newHead) tail = prev;
             Node* next = newHead->next;
             prev->next = next;
             if (next) {
                 next->prev = prev;
             }
-            newHead->prev = nullptr;
         }
-        insertFront(newHead);
+        newHead->prev = head->prev;
+        if (newHead->prev) {
+            newHead->prev->next = newHead;
+        }
+        newHead->next = head;
+        head->prev = newHead;
+        head = newHead;
     }
 
-public:
-    explicit LRUCache(int cap) : Cache() {
-        cp = cap;
+    //allocate cache nodes. head initially points to the same node as tail
+    void allocateCache() {
+        //Preallocate storage
+        generate(cacheStorage.begin(), cacheStorage.end(), []() { return new Node{ 0,0 }; });
+        for (auto node = 0; node < cacheStorage.size() - 1; ++node) {
+            cacheStorage.at(node)->next = cacheStorage.at(node + 1);
+            cacheStorage.at(node + 1)->prev = cacheStorage.at(node);
+        }
+        head = nullptr;
+        tail = cacheStorage.back();
     }
+
+    void printCache() {
+        Node* toPrint = head;
+        while (toPrint != nullptr) {
+            cout << toPrint->key << " ";
+            toPrint = toPrint->next;
+        }
+        cout << endl;
+    }
+public:
+    explicit LRUCache(int cap) : Cache(), cacheStorage(cap), nextEmpty(cap - 1) {
+        cp = cap;
+        allocateCache();
+    }
+
     LRUCache() = delete;
     //Don't care about leaks right now. 
     ~LRUCache() {
-        while (head != nullptr) {
-            removeLRU();
+        for (auto i = 0; i < cacheStorage.size(); ++i) {
+            delete cacheStorage.at(i);
         }
     }
+
 
     //Insert a new node in the cache
     void set(int key, int val) override {
         //do I need to throw away the LRU data? How do I know if the cache is full?
         if (cacheFull()) {
-            removeLRU();
+            removeLRU(key, val);
+            //printCache();
+            return;
         }
-
-        Node* newNode = new Node(key, val);
-        //set operation is insert at head
-        insertFront(newNode);
-        mp[key] = newNode;   //throw an exception if key already exist
+        //Fill the cache backward
+        Node* newNode = cacheStorage.at(nextEmpty);
+        newNode->key = key;
+        newNode->value = val;
+        head = newNode;
+        mp[key] = newNode;
+        nextEmpty -= 1;
+        //printCache();
     }
 
     int get(int key) override {
         //Find the key in the map. if not found return -1. if found, promote the
         //node to the front of the cache then return the key
         auto loc = mp.find(key);
-        if (loc == mp.end()) return -1;
+        if (loc == mp.end()) {
+            //printCache();
+            return -1;
+        }
         //Now promote the node
         Node* cacheItem = loc->second;
-        promoteNode(cacheItem);
+        moveToFront(cacheItem);
+        //printCache();
         return cacheItem->value;
     }
 };
 
 int main() {
+    int n, capacity, i;
+    cin >> n >> capacity;
+    LRUCache l(capacity);
+    for (i = 0; i < n; i++) {
+        string command;
+        cin >> command;
+        if (command == "get") {
+            int key;
+            cin >> key;
+            cout << l.get(key) << endl;
+        }
+        else if (command == "set") {
+            int key, value;
+            cin >> key >> value;
+            l.set(key, value);
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,18 @@
+<iomanip>
+endl
+flush
+setw
+left
+right
+internal
+boolalpha and noboolalpha
+showpos and noshowpos
+dec, oct, and hex
+showbase and noshowbase
+uppercase and nouppercase
+fixed and scientific
+cout.unsetf(ios::fixed | ios::scientific);
+general
+setprecision
+showpoint and noshowpoint
+setfill

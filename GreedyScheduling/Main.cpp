@@ -48,7 +48,6 @@ void maximizeTimeSlot(const vector<TimeSlot>& timeSlots, vector<TimeSlot>::itera
 vector<TimeSlot> maximizeTimeSlot(const vector<TimeSlot>& timeSlots) {
 	vector<TimeSlot> result{ timeSlots[0] };
 	auto next = timeSlots.cbegin();
-	//auto next = timeSlots.cbegin();
 	while ((next = find_if(++next, timeSlots.cend(), [&](const auto& item) { return item.first >= result.back().second; })) != timeSlots.cend()) {
 		result.push_back(*next);
 	}
